@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import lombok.Data;
 
 @MappedSuperclass
@@ -18,17 +16,4 @@ public class SystemDateEntityParts implements Serializable {
 
 	@Column(name = "update_at", columnDefinition = "TIMESTAMP")
 	private LocalDateTime updateAt;
-
-	@PrePersist
-	protected void afterRegist() {
-		LocalDateTime date = LocalDateTime.now();
-		setRegistAt(date);
-		setUpdateAt(date);
-	}
-
-	@PreUpdate
-	protected void afterUpdate() {
-		LocalDateTime date = LocalDateTime.now();
-		setUpdateAt(date);
-	}
 }
