@@ -1,11 +1,16 @@
 package com.ah.querydatasource.entity.apartowner;
 
 
+import java.util.List;
+
 import com.ah.querydatasource.entity.parts.SystemDateEntityParts;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,4 +48,14 @@ public class ApartownersEntity extends SystemDateEntityParts {
 
 	@Column(name = "after_street")
 	private String afterStreet;
+	
+	
+	//リレーションマッピング
+	@JsonIgnore
+	@OneToMany(mappedBy = "apartowner")
+	private List<ApartmentsEntity> apartments;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "apartowner")
+	private ApartownerContactsEntity apartownerContact;
 }
